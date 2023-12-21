@@ -8,7 +8,7 @@ public class Shooter : MonoBehaviour
     private float power; // 現在の力の値
     private bool isIncreasing = true; // 力が増加しているかどうか
     private float width = 0.5f;
-    private bool readyThrow = false;//投げる準備
+    private bool setObject = false;//投げるものがセットされているか
 
     private Animator animator;
 
@@ -20,7 +20,7 @@ public class Shooter : MonoBehaviour
 
     void Update()
     {
-        if (readyThrow)
+        if (setObject)
         {
             if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
             {
