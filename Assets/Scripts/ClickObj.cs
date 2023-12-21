@@ -4,8 +4,15 @@ public class ClickMoveObject2D : MonoBehaviour
 {
     public GameObject[] gameObjects; // ゲームオブジェクトの配列
     public GameObject targetObject; // 移動先のオブジェクト
-    private GameObject currentSelectedObject; // 現在選択されているオブジェクト
+    private GameObject currentSelectedObject; 
+    public GameObject CurrentSelectedObject // 現在選択されているオブジェクト
+    {
+        get { return currentSelectedObject; }
+        set { currentSelectedObject = value; }
+    }
+
     private Vector3 originalPosition; // オブジェクトの元の位置
+    private Transform originalParent; // オブジェクトの元の親
 
     void Update()
     {
@@ -34,10 +41,22 @@ public class ClickMoveObject2D : MonoBehaviour
         {
             // 以前に選択されたオブジェクトを元の位置に戻す
             currentSelectedObject.transform.position = originalPosition;
+            currentSelectedObject.transform.SetParent(originalParent);
+            
         }
-
+        originalParent = selectedObject.transform.parent; // 元の親を保存
         originalPosition = selectedObject.transform.position; // 元の位置を保存
         currentSelectedObject = selectedObject; // 現在選択されたオブジェクトを更新
         selectedObject.transform.position = targetObject.transform.position; // 新しい位置に移動
+        selectedObject.transform.SetParent(targetObject.transform); // targetObjectを新しい親として設定
+    }
+
+    public void DeleteSelectedObject()
+    {
+        if (currentSelectedObject != null)
+        {
+            Destroy(currentSelectedObject); // オブジェクトを削除
+            currentSelectedObject = null; // 参照をnullにリセット
+        }
     }
 }
