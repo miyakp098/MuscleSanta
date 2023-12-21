@@ -8,7 +8,7 @@ public class Shooter : MonoBehaviour
     public GameObject throwPoint;
     private float power; // 現在の力の値
     private bool isIncreasing = true; // 力が増加しているかどうか
-    private float width = 0.5f;
+    private float width = 1;
     public bool setObject = false;//投げるものがセットされているか
     public ClickMoveObject2D clickMoveScript;
     private Animator animator;
@@ -61,7 +61,7 @@ public class Shooter : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0)) // マウスを離した瞬間
             {
-                ResetPowerMeter(); // メーターをリセット
+                
                 animator.SetBool("throw", false); // Animatorのboolをfalseに設定
 
                 EndDragging();//矢印
@@ -87,9 +87,9 @@ public class Shooter : MonoBehaviour
         if (isIncreasing)
         {
             power += Time.deltaTime; // 力を増加
-            if (power > 1)
+            if (power > 1.5f)
             {
-                power = 1;
+                power = 1.5f;
                 isIncreasing = false; // 力の増加を停止
             }
         }
@@ -104,16 +104,17 @@ public class Shooter : MonoBehaviour
         }
 
         // 2Dオブジェクトの大きさを更新
-        powerMeter.transform.localScale = new Vector3(power, width, 1f);
+        powerMeter.transform.localScale = new Vector3(width,  3 - power * 2, 1f);
     }
 
     private void ResetPowerMeter()
     {
-        powerMeter.transform.localScale = new Vector3(0, width, 1f); // メーターの大きさをリセット
+        powerMeter.transform.localScale = new Vector3(width, 3, 1f); // メーターの大きさをリセット
     }
 
     private void ShootProjectile()
     {
+        ResetPowerMeter(); // メーターをリセット
         setObject = false;
         // Rigidbody2Dコンポーネントを取得
         Rigidbody2D rb = prefab.GetComponent<Rigidbody2D>();
