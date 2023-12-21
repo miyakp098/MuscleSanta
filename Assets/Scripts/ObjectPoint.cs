@@ -8,12 +8,14 @@ public class ObjectPoint : MonoBehaviour
     private Animator animator;
     public GameObject setObj;
     private Vector2 setPosi;
-    public ClickMoveObject2D clickMoveScript;
+
+    public GameObject targetObject;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         setPosi = setObj.transform.position;
+        SetSortingOrder(targetObject, 10); // Order in Layer初期値
     }
 
 
@@ -21,6 +23,7 @@ public class ObjectPoint : MonoBehaviour
     private void StandingPosi()
     {
         setObj.transform.position = setPosi;
+        SetSortingOrder(targetObject, 10); // Order in Layer初期値
     }
 
     private void StandingPosi2()
@@ -31,6 +34,7 @@ public class ObjectPoint : MonoBehaviour
     private void ThrowingPosi1()
     {
         setObj.transform.position = new Vector2(setPosi.x - 2.8f, setPosi.y + 0.21f);
+        SetSortingOrder(targetObject, -10); // Order in Layerを後ろに
     }
     private void ThrowingPosi2()
     {
@@ -38,24 +42,20 @@ public class ObjectPoint : MonoBehaviour
     }
     private void ThrowingPosi3()
     {
-        if (setObj == null)
-        {
-            Debug.LogError("setObj is null.");
-            return;
-        }
-
-        if (clickMoveScript == null)
-        {
-            Debug.LogError("clickMoveScript is null.");
-            return;
-        }
-
-        if (setPosi == null)
-        {
-            Debug.LogError("setPosi is null.");
-            return;
-        }
         setObj.transform.position = new Vector2(setPosi.x - 2.6f, setPosi.y + 0.64f);
-        clickMoveScript.DeleteSelectedObject();
+
+    }
+
+    void SetSortingOrder(GameObject obj, int order)
+    {
+        SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingOrder = order;
+        }
+        else
+        {
+            Debug.LogError("SpriteRenderer component not found on the object.");
+        }
     }
 }

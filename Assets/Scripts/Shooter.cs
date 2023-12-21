@@ -9,7 +9,7 @@ public class Shooter : MonoBehaviour
     private bool isIncreasing = true; // 力が増加しているかどうか
     private float width = 0.5f;
     public bool setObject = false;//投げるものがセットされているか
-
+    public ClickMoveObject2D clickMoveScript;
     private Animator animator;
 
     void Start()
@@ -75,6 +75,7 @@ public class Shooter : MonoBehaviour
 
     private void ShootProjectile()
     {
+        clickMoveScript.DeleteSelectedObject();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
