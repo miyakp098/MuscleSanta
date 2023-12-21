@@ -8,6 +8,7 @@ public class Shooter : MonoBehaviour
     private float power; // 現在の力の値
     private bool isIncreasing = true; // 力が増加しているかどうか
     private float width = 0.5f;
+    private bool readyThrow = false;//投げる準備
 
     private Animator animator;
 
@@ -19,23 +20,27 @@ public class Shooter : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
+        if (readyThrow)
         {
-            power = 0; // 力をリセット
-            isIncreasing = true;
-            animator.SetBool("throw", true); // Animatorのboolをtrueに設定
-        }
+            if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
+            {
+                power = 0; // 力をリセット
+                isIncreasing = true;
+                animator.SetBool("throw", true); // Animatorのboolをtrueに設定
+            }
 
-        if (Input.GetMouseButton(0)) // マウスを押し続けている間
-        {
-            UpdatePowerMeter();
-        }
+            if (Input.GetMouseButton(0)) // マウスを押し続けている間
+            {
+                UpdatePowerMeter();
+            }
 
-        if (Input.GetMouseButtonUp(0)) // マウスを離した瞬間
-        {
-            ResetPowerMeter(); // メーターをリセット
-            animator.SetBool("throw", false); // Animatorのboolをfalseに設定
+            if (Input.GetMouseButtonUp(0)) // マウスを離した瞬間
+            {
+                ResetPowerMeter(); // メーターをリセット
+                animator.SetBool("throw", false); // Animatorのboolをfalseに設定
+            }
         }
+        
     }
 
     private void UpdatePowerMeter()
