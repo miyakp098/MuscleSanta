@@ -14,6 +14,13 @@ public class Shooter : MonoBehaviour
     private Animator animator;
     public Button readyButton;
 
+
+    //矢印
+    public GameObject arrowPrefab; // 矢印のプレハブ
+    private GameObject currentArrow; // 現在表示されている矢印
+    private bool isDragging = false; // ドラッグ中かどうかのフラグ
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -30,12 +37,15 @@ public class Shooter : MonoBehaviour
 
         if (prefab != null && setObject)
         {
-            
+
+
             if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
             {
                 power = 0; // 力をリセット
                 isIncreasing = true;
                 animator.SetBool("throw", true); // Animatorのboolをtrueに設定
+
+                StartDragging();//矢印
             }
 
             if (Input.GetMouseButton(0)) // マウスを押し続けている間
@@ -43,10 +53,18 @@ public class Shooter : MonoBehaviour
                 UpdatePowerMeter();
             }
 
+            //矢印
+            if (isDragging)
+            {
+                UpdateArrowPositionAndRotation();
+            }
+
             if (Input.GetMouseButtonUp(0)) // マウスを離した瞬間
             {
                 ResetPowerMeter(); // メーターをリセット
                 animator.SetBool("throw", false); // Animatorのboolをfalseに設定
+
+                EndDragging();//矢印
             }
         }
         else if(prefab != null)
@@ -113,5 +131,33 @@ public class Shooter : MonoBehaviour
         GameObject projectile = Instantiate(prefab, throwPoint.transform.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * power * 17f; // メーターの値に基づいて力を計算
         projectile.GetComponent<Rigidbody2D>().angularVelocity = power * 1000f; // 回転速度
+    }
+
+
+
+
+
+    //矢印
+    private void StartDragging()
+    {
+        isDragging = true;
+        Vector3 startPosition = throwPoint.transform.position;
+        currentArrow = Instantiate(arrowPrefab, startPosition, Quaternion.identity);
+    }
+
+    private void UpdateArrowPositionAndRotation()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // Z軸は無視
+
+        Vector3 direction = mousePosition - throwPoint.transform.position;
+        currentArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction); // 矢印の方向を設定
+        // currentArrow.transform.localScale の設定は削除し、矢印の大きさは変更しない
+    }
+
+    private void EndDragging()
+    {
+        isDragging = false;
+        Destroy(currentArrow); // 矢印を削除
     }
 }
