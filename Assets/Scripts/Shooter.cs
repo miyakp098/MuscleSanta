@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooter : MonoBehaviour
 {
-    public GameObject prefab; // 発射するプレハブ
+    private GameObject prefab; // 発射するプレハブ
     public GameObject powerMeter; // 力のメーターを表示する2Dオブジェクト
     public GameObject throwPoint;
     private float power; // 現在の力の値
@@ -11,17 +12,25 @@ public class Shooter : MonoBehaviour
     public bool setObject = false;//投げるものがセットされているか
     public ClickMoveObject2D clickMoveScript;
     private Animator animator;
+    public Button readyButton;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        prefab = null;
+        setObject = false;
+        readyButton.onClick.AddListener(OnButtonClicked);
+        readyButton.gameObject.SetActive(false);
     }
 
 
     void Update()
     {
-        if (setObject)
+        prefab = clickMoveScript.CurrentSelectedObject;
+
+        if (prefab != null && setObject)
         {
+            
             if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
             {
                 power = 0; // 力をリセット
@@ -40,7 +49,19 @@ public class Shooter : MonoBehaviour
                 animator.SetBool("throw", false); // Animatorのboolをfalseに設定
             }
         }
+        else if(prefab != null)
+        {
+            readyButton.gameObject.SetActive(true);
+        }
         
+        
+    }
+
+    // ボタンがクリックされたときに呼び出されるメソッド
+    public void OnButtonClicked()
+    {
+        setObject = true;
+        readyButton.gameObject.SetActive(false);
     }
 
     private void UpdatePowerMeter()
@@ -75,6 +96,14 @@ public class Shooter : MonoBehaviour
 
     private void ShootProjectile()
     {
+        setObject = false;
+        // Rigidbody2Dコンポーネントを取得
+        Rigidbody2D rb = prefab.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            // BodyTypeをDynamicに設定
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
         clickMoveScript.DeleteSelectedObject();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
@@ -83,5 +112,6 @@ public class Shooter : MonoBehaviour
 
         GameObject projectile = Instantiate(prefab, throwPoint.transform.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * power * 17f; // メーターの値に基づいて力を計算
+        projectile.GetComponent<Rigidbody2D>().angularVelocity = power * 1000f; // 回転速度
     }
 }
