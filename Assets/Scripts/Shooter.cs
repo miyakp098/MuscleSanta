@@ -4,9 +4,18 @@ public class Shooter : MonoBehaviour
 {
     public GameObject prefab; // 発射するプレハブ
     public GameObject powerMeter; // 力のメーターを表示する2Dオブジェクト
+    public GameObject throwPoint;
     private float power; // 現在の力の値
     private bool isIncreasing = true; // 力が増加しているかどうか
     private float width = 0.5f;
+
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
 
     void Update()
     {
@@ -14,6 +23,7 @@ public class Shooter : MonoBehaviour
         {
             power = 0; // 力をリセット
             isIncreasing = true;
+            animator.SetBool("throw", true); // Animatorのboolをtrueに設定
         }
 
         if (Input.GetMouseButton(0)) // マウスを押し続けている間
@@ -23,8 +33,8 @@ public class Shooter : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0)) // マウスを離した瞬間
         {
-            ShootProjectile();
             ResetPowerMeter(); // メーターをリセット
+            animator.SetBool("throw", false); // Animatorのboolをfalseに設定
         }
     }
 
@@ -63,9 +73,9 @@ public class Shooter : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
-        Vector2 direction = (mousePosition - transform.position).normalized;
+        Vector2 direction = (mousePosition - throwPoint.transform.position).normalized;
 
-        GameObject projectile = Instantiate(prefab, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(prefab, throwPoint.transform.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * power * 17f; // メーターの値に基づいて力を計算
     }
 }
