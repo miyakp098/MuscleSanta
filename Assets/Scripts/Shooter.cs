@@ -12,13 +12,22 @@ public class Shooter : MonoBehaviour
     public bool setObject = false;//投げるものがセットされているか
     public ClickMoveObject2D clickMoveScript;
     private Animator animator;
+
+
+    //ボタン
     public Button readyButton;
 
+
+    public bool canClick = true; // マウスクリックが有効かどうかを追跡する変数
 
     //矢印
     public GameObject arrowPrefab; // 矢印のプレハブ
     private GameObject currentArrow; // 現在表示されている矢印
     private bool isDragging = false; // ドラッグ中かどうかのフラグ
+
+    //カメラ
+    public CameraController cameraController;
+
 
 
     void Start()
@@ -28,6 +37,7 @@ public class Shooter : MonoBehaviour
         setObject = false;
         readyButton.onClick.AddListener(OnButtonClicked);
         readyButton.gameObject.SetActive(false);
+        canClick = true;
     }
 
 
@@ -35,7 +45,7 @@ public class Shooter : MonoBehaviour
     {
         prefab = clickMoveScript.CurrentSelectedObject;
 
-        if (prefab != null && setObject)
+        if (prefab != null && setObject && canClick)
         {
 
 
@@ -65,6 +75,8 @@ public class Shooter : MonoBehaviour
                 animator.SetBool("throw", false); // Animatorのboolをfalseに設定
 
                 EndDragging();//矢印
+
+                
             }
         }
         else if(prefab != null)
@@ -116,6 +128,9 @@ public class Shooter : MonoBehaviour
     {
         ResetPowerMeter(); // メーターをリセット
         setObject = false;
+
+        canClick = false; // マウスクリックを無効にする
+
         // Rigidbody2Dコンポーネントを取得
         Rigidbody2D rb = prefab.GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -132,6 +147,19 @@ public class Shooter : MonoBehaviour
         GameObject projectile = Instantiate(prefab, throwPoint.transform.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * power * 17f; // メーターの値に基づいて力を計算
         projectile.GetComponent<Rigidbody2D>().angularVelocity = power * 1000f; // 回転速度
+        Collider2D collider = projectile.GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            collider.enabled = true;
+        }
+
+        // プロジェクタイルをカメラのターゲットとして設定
+        if (cameraController != null)
+        {
+            cameraController.throwObj = projectile;
+        }
+
+
     }
 
 

@@ -14,25 +14,31 @@ public class ClickMoveObject2D : MonoBehaviour
     private Vector3 originalPosition; // オブジェクトの元の位置
     private Transform originalParent; // オブジェクトの元の親
 
+    public Shooter Shooter;
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // マウス左クリックを検出
+        if (Shooter.canClick)
         {
-            Vector2 rayPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.zero);
-
-            if (hit.collider != null)
+            if (Input.GetMouseButtonDown(0)) // マウス左クリックを検出
             {
-                foreach (var obj in gameObjects)
+                Vector2 rayPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.zero);
+
+                if (hit.collider != null)
                 {
-                    if (hit.transform.gameObject == obj)
+                    foreach (var obj in gameObjects)
                     {
-                        MoveObject(obj);
-                        break;
+                        if (hit.transform.gameObject == obj)
+                        {
+                            MoveObject(obj);
+                            break;
+                        }
                     }
                 }
             }
         }
+        
     }
 
     void MoveObject(GameObject selectedObject)
