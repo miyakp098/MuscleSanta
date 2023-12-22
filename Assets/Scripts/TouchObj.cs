@@ -1,33 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class TouchObj : MonoBehaviour
 {
-    //ボタン
-    public Button backButton;
+    //カメラ
+    public CameraController cameraController;
+    public Shooter Shooter;
 
-    private void Start()
-    {
-        backButton.onClick.AddListener(OnButtonClicked);
-        backButton.gameObject.SetActive(false);
-    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        StartCoroutine(WaitAndProcess(3f));
     }
 
-
-    void OnTriggerEnter2D(Collider2D collider)
+    IEnumerator WaitAndProcess(float waitTime)
     {
+        yield return new WaitForSeconds(waitTime); // 指定された秒数待機
 
-    }
-
-    // ボタンがクリックされたときに呼び出されるメソッド
-    public void OnButtonClicked()
-    {
-        backButton.gameObject.SetActive(false);
+        cameraController.throwObj = null; // 3秒後に処理を実行
+        Shooter.canClick = true;
     }
 }
