@@ -11,7 +11,7 @@ public class TouchObj : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        StartCoroutine(WaitAndProcess(3f));
+        StartCoroutine(WaitAndProcess(2f));
     }
 
     IEnumerator WaitAndProcess(float waitTime)
