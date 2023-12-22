@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class DeleteObj : MonoBehaviour
 {
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        Destroy(collision.gameObject);
-    }
+    //カメラ
+    public CameraController cameraController;
+    public Shooter Shooter;
 
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-
+        cameraController.throwObj = null;
         Destroy(collider.gameObject);
+        Shooter.canClick = true;
     }
 }
