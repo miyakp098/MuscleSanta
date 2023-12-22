@@ -87,7 +87,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            buttonText.text = $"{displayIndex}軒目({displayIndex}/{cameraPositions.Length - 1})";
+            buttonText.text = $"{displayIndex}人目({displayIndex}/{cameraPositions.Length - 1})";
         }
         
     }

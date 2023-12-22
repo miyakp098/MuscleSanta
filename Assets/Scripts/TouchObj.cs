@@ -11,7 +11,12 @@ public class TouchObj : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        StartCoroutine(WaitAndProcess(2f));
+        if (collision.gameObject.CompareTag("present"))
+        {
+            collision.gameObject.tag = "lost"; // タグを変更
+            StartCoroutine(WaitAndProcess(2f));
+        }
+            
     }
 
     IEnumerator WaitAndProcess(float waitTime)
