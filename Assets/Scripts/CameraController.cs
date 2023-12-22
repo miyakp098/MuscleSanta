@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     public float returnSpeed = 3.0f;
     Vector3 cameraPos;
     private float startPosY;
-    private int currentCameraPositionIndex = 0; // 現在のカメラ位置のインデックス
+    private int currentCameraPositionIndex = -1; // 現在のカメラ位置のインデックス
 
     private bool isMoving = false; // カメラが移動中かどうかのフラグ
 
@@ -81,6 +81,14 @@ public class CameraController : MonoBehaviour
     private void UpdateButtonLabel()
     {
         displayIndex = currentCameraPositionIndex + 1;
-        buttonText.text = $"贈り先を確認する({displayIndex}/{cameraPositions.Length})";
+        if(displayIndex == cameraPositions.Length)
+        {
+            buttonText.text = "贈り先を確認する";
+        }
+        else
+        {
+            buttonText.text = $"{displayIndex}軒目({displayIndex}/{cameraPositions.Length - 1})";
+        }
+        
     }
 }
