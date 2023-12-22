@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,9 @@ public class CameraController : MonoBehaviour
 {
     public GameObject throwObj;
     public Button kakuninButton; // ボタンを追加
+    public TextMeshProUGUI buttonText;
+    private int displayIndex;
+
     public GameObject[] cameraPositions; // カメラの移動位置のためのゲームオブジェクトの配列
     public float leftPos = 0;
     public float rightPos = 33;
@@ -70,5 +74,13 @@ public class CameraController : MonoBehaviour
 
         isMoving = true; // カメラ移動フラグを true に設定
         currentCameraPositionIndex = (currentCameraPositionIndex + 1) % cameraPositions.Length;
+
+        UpdateButtonLabel(); // ボタンのラベルを更新
+    }
+
+    private void UpdateButtonLabel()
+    {
+        displayIndex = currentCameraPositionIndex + 1;
+        buttonText.text = $"贈り先を確認する({displayIndex}/{cameraPositions.Length})";
     }
 }
