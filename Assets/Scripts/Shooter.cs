@@ -147,11 +147,12 @@ public class Shooter : MonoBehaviour
         GameObject projectile = Instantiate(prefab, throwPoint.transform.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * power * 17f; // メーターの値に基づいて力を計算
         projectile.GetComponent<Rigidbody2D>().angularVelocity = power * 1000f; // 回転速度
-        Collider2D collider = projectile.GetComponent<Collider2D>();
-        if (collider != null)
+        Collider2D[] colliders = projectile.GetComponents<Collider2D>();
+        foreach (Collider2D collider in colliders)
         {
             collider.enabled = true;
         }
+
 
         // プロジェクタイルをカメラのターゲットとして設定
         if (cameraController != null)
