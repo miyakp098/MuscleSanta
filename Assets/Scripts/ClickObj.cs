@@ -14,14 +14,19 @@ public class ClickMoveObject2D : MonoBehaviour
     private Vector3 originalPosition; // オブジェクトの元の位置
     private Transform originalParent; // オブジェクトの元の親
 
-    public Shooter Shooter;
+    public Shooter shooter;
 
     //SE
     public AudioClip changeObj;
 
+    void Awake()
+    {
+        shooter = FindObjectOfType<Shooter>();
+    }
+
     void Update()
     {
-        if (Shooter.canClick)
+        if (shooter.canClick)
         {
             if (Input.GetMouseButtonDown(0)) // マウス左クリックを検出
             {

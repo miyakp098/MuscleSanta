@@ -1,26 +1,30 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class TouchObj : MonoBehaviour
+public class hitObj : MonoBehaviour
 {
+    //SE
+    public AudioClip hitSE;
+
     //カメラ
     public CameraController cameraController;
     public Shooter shooter;
+
     void Awake()
     {
         cameraController = FindObjectOfType<CameraController>();
         shooter = FindObjectOfType<Shooter>();
     }
 
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("present"))
+        GameManager.instance.PlaySE(hitSE);
+        if (collision.gameObject.CompareTag("lost"))
         {
-            collision.gameObject.tag = "lost"; // タグを変更
             StartCoroutine(WaitAndProcess(2f));
         }
-            
     }
 
     IEnumerator WaitAndProcess(float waitTime)

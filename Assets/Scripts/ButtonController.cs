@@ -8,8 +8,11 @@ public class ButtonController : MonoBehaviour
 {
     public Button kakuninButton;
 
-    public Shooter Shooter;
-
+    public Shooter shooter;
+    void Awake()
+    {
+        shooter = FindObjectOfType<Shooter>();
+    }
     void Start()
     {
         kakuninButton.gameObject.SetActive(false);
@@ -17,7 +20,7 @@ public class ButtonController : MonoBehaviour
 
     private void Update()
     {
-        if (!Shooter.setObject && Shooter.canClick)
+        if (!shooter.setObject && shooter.canClick)
         {
             kakuninButton.gameObject.SetActive(true);
         }

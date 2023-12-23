@@ -6,13 +6,17 @@ public class DeleteObj : MonoBehaviour
 {
     //カメラ
     public CameraController cameraController;
-    public Shooter Shooter;
+    public Shooter shooter;
 
-
+    void Awake()
+    {
+        cameraController = FindObjectOfType<CameraController>();
+        shooter = FindObjectOfType<Shooter>();
+    }
     void OnTriggerEnter2D(Collider2D collider)
     {
         cameraController.throwObj = null;
         Destroy(collider.gameObject);
-        Shooter.canClick = true;
+        shooter.canClick = true;
     }
 }
