@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     public GameObject throwObj;
     public Button kakuninButton; // ボタンを追加
     public TextMeshProUGUI buttonText;
-    private int displayIndex;
+    public int displayIndex;
 
     public GameObject[] cameraPositions; // カメラの移動位置のためのゲームオブジェクトの配列
     public float leftPos = 0;
@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     private int currentCameraPositionIndex = -1; // 現在のカメラ位置のインデックス
 
     private bool isMoving = false; // カメラが移動中かどうかのフラグ
-
+    public bool kakuninButtonNum;
 
     //SE
     public AudioClip kakuninButtonSE;
@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
         startPosY = transform.position.y;
 
         kakuninButton.onClick.AddListener(MoveCamera); // ボタンにイベントリスナーを追加
+        kakuninButtonNum = true;
     }
 
     void Update()
@@ -89,11 +90,13 @@ public class CameraController : MonoBehaviour
         if(displayIndex == cameraPositions.Length)
         {
             buttonText.text = "贈り先を確認する";
+            kakuninButtonNum = true;
         }
         else
         {
             buttonText.text = $"{displayIndex}人目({displayIndex}/{cameraPositions.Length - 1})";
+            kakuninButtonNum = false;
         }
-        
+        Debug.Log(kakuninButtonNum);
     }
 }

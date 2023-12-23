@@ -27,7 +27,7 @@ public class TouchObj : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime); // 指定された秒数待機
 
-        cameraController.throwObj = null; // 3秒後に処理を実行
+        cameraController.throwObj = null; // n秒後に処理を実行
         shooter.canClick = true;
     }
 }

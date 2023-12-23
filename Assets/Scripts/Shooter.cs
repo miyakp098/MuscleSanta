@@ -32,7 +32,7 @@ public class Shooter : MonoBehaviour
     //SE
     public AudioClip throwSE;
     public AudioClip readyButtonSE;
-
+   
 
     void Start()
     {
@@ -82,6 +82,10 @@ public class Shooter : MonoBehaviour
 
                 
             }
+        }
+        else if (!cameraController.kakuninButtonNum)
+        {
+            readyButton.gameObject.SetActive(false);
         }
         else if(prefab != null)
         {
