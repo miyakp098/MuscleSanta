@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;  // UIシステムを使用するために必要
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    private AudioSource audioSourceBGM = null;
-    private AudioSource audioSourceSE = null;
+    public AudioSource audioSourceBGM = null;
+    public AudioSource audioSourceSE = null;
     public int score = 0;
+    public int highScore = 0;
 
-    public Slider sliderBGM;  // BGMのスライダー
-    public Slider sliderSE;   // SEのスライダー
+
 
     private void Awake()
     {
@@ -32,21 +32,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        // スライダーの初期値を設定し、イベントリスナーを追加
-        if (sliderBGM != null)
-        {
-            sliderBGM.value = audioSourceBGM.volume;
-            sliderBGM.onValueChanged.AddListener(delegate { SetVolumeBGM(sliderBGM.value); });
-        }
-
-        if (sliderSE != null)
-        {
-            sliderSE.value = audioSourceSE.volume;
-            sliderSE.onValueChanged.AddListener(delegate { SetVolumeSE(sliderSE.value); });
-        }
-    }
 
     // BGMボリュームを設定するメソッド
     public void SetVolumeBGM(float volume)
