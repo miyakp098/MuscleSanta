@@ -14,6 +14,7 @@ public class Shooter : MonoBehaviour
     public ClickMoveObject2D clickMoveScript;
     private Animator animator;
 
+    public int count = 7;
 
     //ボタン
     public Button readyButton;
@@ -170,7 +171,8 @@ public class Shooter : MonoBehaviour
             cameraController.throwObj = projectile;
         }
 
-
+        //カウントが0になったら終わり
+        count--;
     }
 
 

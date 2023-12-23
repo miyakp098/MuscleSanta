@@ -40,6 +40,11 @@ public class TouchObj : MonoBehaviour
 
         cameraController.throwObj = null; // n秒後に処理を実行
         shooter.canClick = true;
-        plusScoreText.text = "";
+        if(shooter.count != 0)
+        {
+            plusScoreText.text = "";
+        }
+        
+        Debug.Log("OK");
     }
 }

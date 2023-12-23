@@ -20,7 +20,7 @@ public class ButtonController : MonoBehaviour
 
     private void Update()
     {
-        if (!shooter.setObject && shooter.canClick)
+        if (!shooter.setObject && shooter.canClick && shooter.count != 0)
         {
             kakuninButton.gameObject.SetActive(true);
         }
