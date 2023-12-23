@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4701512581384913737}
   - component: {fileID: 5691351039307570787}
   - component: {fileID: 7398396302004983447}
+  - component: {fileID: -8006108263278423164}
   m_Layer: 0
   m_Name: snack2
   m_TagString: present
@@ -158,3 +159,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &-8006108263278423164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8835554383330304527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafefdafacdff48db8aba9437c90fce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSE: {fileID: 8300000, guid: 88d4ec505dd3146b6acb37e4b3b20179, type: 3}

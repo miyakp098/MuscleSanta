@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ public class Shooter : MonoBehaviour
 
     //ボタン
     public Button readyButton;
-
+    
 
     public bool canClick = true; // マウスクリックが有効かどうかを追跡する変数
 
@@ -28,6 +29,9 @@ public class Shooter : MonoBehaviour
     //カメラ
     public CameraController cameraController;
 
+    //SE
+    public AudioClip throwSE;
+    public AudioClip readyButtonSE;
 
 
     void Start()
@@ -90,6 +94,7 @@ public class Shooter : MonoBehaviour
     // ボタンがクリックされたときに呼び出されるメソッド
     public void OnButtonClicked()
     {
+        GameManager.instance.PlaySE(readyButtonSE);
         setObject = true;
         readyButton.gameObject.SetActive(false);
     }
@@ -126,6 +131,7 @@ public class Shooter : MonoBehaviour
 
     private void ShootProjectile()
     {
+        GameManager.instance.PlaySE(throwSE);
         ResetPowerMeter(); // メーターをリセット
         setObject = false;
 

@@ -21,6 +21,10 @@ public class CameraController : MonoBehaviour
 
     private bool isMoving = false; // カメラが移動中かどうかのフラグ
 
+
+    //SE
+    public AudioClip kakuninButtonSE;
+
     private void Start()
     {
         throwObj = null;
@@ -80,6 +84,7 @@ public class CameraController : MonoBehaviour
 
     private void UpdateButtonLabel()
     {
+        GameManager.instance.PlaySE(kakuninButtonSE);
         displayIndex = currentCameraPositionIndex + 1;
         if(displayIndex == cameraPositions.Length)
         {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6518770265769666618}
   - component: {fileID: 3120992770181561818}
   - component: {fileID: 4648364290969421679}
+  - component: {fileID: 7385712529251484968}
   m_Layer: 0
   m_Name: snack3
   m_TagString: present
@@ -158,3 +159,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 4.3}
   m_EdgeRadius: 0
+--- !u!114 &7385712529251484968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3798527552158125681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafefdafacdff48db8aba9437c90fce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSE: {fileID: 8300000, guid: 88d4ec505dd3146b6acb37e4b3b20179, type: 3}

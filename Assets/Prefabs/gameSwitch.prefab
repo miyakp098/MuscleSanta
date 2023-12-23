@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4553940439913964975}
   - component: {fileID: 1214485298151581778}
   - component: {fileID: 8453199128401373853}
+  - component: {fileID: 1066545830239193173}
   m_Layer: 0
   m_Name: gameSwitch
   m_TagString: present
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4553940439913964975
 SpriteRenderer:
@@ -158,3 +159,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1066545830239193173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091237570461202594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafefdafacdff48db8aba9437c90fce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSE: {fileID: 8300000, guid: 88d4ec505dd3146b6acb37e4b3b20179, type: 3}

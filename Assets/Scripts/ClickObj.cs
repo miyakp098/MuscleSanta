@@ -16,6 +16,9 @@ public class ClickMoveObject2D : MonoBehaviour
 
     public Shooter Shooter;
 
+    //SE
+    public AudioClip changeObj;
+
     void Update()
     {
         if (Shooter.canClick)
@@ -43,6 +46,7 @@ public class ClickMoveObject2D : MonoBehaviour
 
     void MoveObject(GameObject selectedObject)
     {
+        GameManager.instance.PlaySE(changeObj);
         if (currentSelectedObject != null)
         {
             // 以前に選択されたオブジェクトを元の位置に戻す
