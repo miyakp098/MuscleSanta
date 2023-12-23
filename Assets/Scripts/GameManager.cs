@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private AudioSource audioSourceBGM = null;
     private AudioSource audioSourceSE = null;
+    public int score = 0;
 
     public Slider sliderBGM;  // BGMのスライダー
     public Slider sliderSE;   // SEのスライダー
@@ -72,4 +73,5 @@ public class GameManager : MonoBehaviour
             Debug.Log("SE用のオーディオソースが設定されていません");
         }
     }
+
 }

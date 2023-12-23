@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3658445466534211947}
   m_Layer: 0
   m_Name: snack1
-  m_TagString: present
+  m_TagString: snack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,3 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSE: {fileID: 8300000, guid: 88d4ec505dd3146b6acb37e4b3b20179, type: 3}
+  cameraController: {fileID: 0}
+  shooter: {fileID: 0}

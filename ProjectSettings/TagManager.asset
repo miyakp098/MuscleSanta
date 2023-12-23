@@ -6,6 +6,11 @@ TagManager:
   tags:
   - present
   - lost
+  - switch
+  - snack
+  - money
+  - stone
+  - toy
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6026482348916293225}
   m_Layer: 0
   m_Name: money
-  m_TagString: present
+  m_TagString: money
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7392715544590081477
 SpriteRenderer:
@@ -172,3 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSE: {fileID: 8300000, guid: 88d4ec505dd3146b6acb37e4b3b20179, type: 3}
+  cameraController: {fileID: 0}
+  shooter: {fileID: 0}

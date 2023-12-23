@@ -15,7 +15,12 @@ public class TouchObj : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("present"))
+        if (collision.gameObject.CompareTag("lost") ||
+            collision.gameObject.CompareTag("switch") ||
+            collision.gameObject.CompareTag("snack") ||
+            collision.gameObject.CompareTag("money") ||
+            collision.gameObject.CompareTag("stone") ||
+            collision.gameObject.CompareTag("toy"))
         {
             collision.gameObject.tag = "lost"; // タグを変更
             StartCoroutine(WaitAndProcess(2f));
