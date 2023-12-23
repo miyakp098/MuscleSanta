@@ -21,7 +21,11 @@ public class hitObj : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         GameManager.instance.PlaySE(hitSE);
-        if (collision.gameObject.CompareTag("lost"))
+        if (collision.gameObject.CompareTag("switch") ||
+            collision.gameObject.CompareTag("snack") ||
+            collision.gameObject.CompareTag("money") ||
+            collision.gameObject.CompareTag("stone") ||
+            collision.gameObject.CompareTag("toy"))
         {
             StartCoroutine(WaitAndProcess(2f));
         }

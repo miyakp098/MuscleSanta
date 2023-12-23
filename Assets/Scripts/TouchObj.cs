@@ -1,16 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class TouchObj : MonoBehaviour
 {
     //カメラ
-    public CameraController cameraController;
-    public Shooter shooter;
+    private CameraController cameraController;
+    private Shooter shooter;
+    public TextMeshProUGUI plusScoreText;
     void Awake()
     {
         cameraController = FindObjectOfType<CameraController>();
         shooter = FindObjectOfType<Shooter>();
+        plusScoreText = FindObjectOfType<TextMeshProUGUI>();
+        if (plusScoreText == null)
+        {
+            Debug.LogError("TextMeshProUGUI object not found in the scene.");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -22,7 +29,6 @@ public class TouchObj : MonoBehaviour
             collision.gameObject.CompareTag("stone") ||
             collision.gameObject.CompareTag("toy"))
         {
-            collision.gameObject.tag = "lost"; // タグを変更
             StartCoroutine(WaitAndProcess(2f));
         }
             
@@ -34,5 +40,6 @@ public class TouchObj : MonoBehaviour
 
         cameraController.throwObj = null; // n秒後に処理を実行
         shooter.canClick = true;
+        plusScoreText.text = "";
     }
 }

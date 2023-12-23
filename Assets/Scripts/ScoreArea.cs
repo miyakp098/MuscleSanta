@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ScoreArea : MonoBehaviour
@@ -12,34 +13,29 @@ public class ScoreArea : MonoBehaviour
     public AudioClip yaySESpesial;
     public AudioClip yaySE;
 
-
+    public TextMeshProUGUI plusScoreText;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("switch") && gameSwitch)
         {
-            GameManager.instance.score += 20 * pointNbai;
-            GameManager.instance.PlaySE(yaySESpesial);
+            SpecialScore();
         }
         else if (collision.gameObject.CompareTag("snack") && snack)
         {
-            GameManager.instance.score += 20 * pointNbai;
-            GameManager.instance.PlaySE(yaySESpesial);
+            SpecialScore();
         }
         else if (collision.gameObject.CompareTag("money") && money)
         {
-            GameManager.instance.score += 20 * pointNbai;
-            GameManager.instance.PlaySE(yaySESpesial);
+            SpecialScore();
         }
         else if (collision.gameObject.CompareTag("stone") && stone)
         {
-            GameManager.instance.score += 20 * pointNbai;
-            GameManager.instance.PlaySE(yaySESpesial);
+            SpecialScore();
         }
         else if (collision.gameObject.CompareTag("toy") && toy)
         {
-            GameManager.instance.score += 20 * pointNbai;
-            GameManager.instance.PlaySE(yaySESpesial);
+            SpecialScore();
         }
         else if (
             collision.gameObject.CompareTag("switch") ||
@@ -48,10 +44,22 @@ public class ScoreArea : MonoBehaviour
             collision.gameObject.CompareTag("stone") ||
             collision.gameObject.CompareTag("toy"))
         {
-            GameManager.instance.score += 5;
-            GameManager.instance.PlaySE(yaySE);
+            NormalScore();
         }
         collision.gameObject.tag = "lost";
 
+    }
+
+    private void SpecialScore()
+    {
+        GameManager.instance.score += 20 * pointNbai;
+        GameManager.instance.PlaySE(yaySESpesial);
+        plusScoreText.text = $"+{20 * pointNbai}Point!!";
+    }
+    private void NormalScore()
+    {
+        GameManager.instance.score += 5 * pointNbai;
+        GameManager.instance.PlaySE(yaySE);
+        plusScoreText.text = $"+{5 * pointNbai}Point!!";
     }
 }
