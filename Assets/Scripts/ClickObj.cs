@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ClickMoveObject2D : MonoBehaviour
 {
-    public GameObject[] gameObjects; // ゲームオブジェクトの配列
+    public GameObject parentObject; // 親オブジェクトをインスペクタから割り当てる
+    public GameObject[] gameObjects;//ゲームオブジェクトの配列
     public GameObject targetObject; // 移動先のオブジェクト
     private GameObject currentSelectedObject; 
     public GameObject CurrentSelectedObject // 現在選択されているオブジェクト
@@ -22,6 +23,25 @@ public class ClickMoveObject2D : MonoBehaviour
     void Awake()
     {
         shooter = FindObjectOfType<Shooter>();
+    }
+
+    void Start()
+    {
+        if (parentObject == null)
+        {
+            parentObject = GameObject.Find("throwObj");
+        }
+        // 親オブジェクトの子オブジェクトの数を取得
+        int childCount = parentObject.transform.childCount;
+
+        // 配列のサイズを子オブジェクトの数に設定
+        gameObjects = new GameObject[childCount];
+
+        // 子オブジェクトを配列に格納
+        for (int i = 0; i < childCount; i++)
+        {
+            gameObjects[i] = parentObject.transform.GetChild(i).gameObject;
+        }
     }
 
     void Update()

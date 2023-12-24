@@ -23,6 +23,7 @@ public class Shooter : MonoBehaviour
 
     public TextMeshPro howToText;
     public TextMeshPro clickText;
+    public TextMeshPro presentNumText;
 
     public int count = 7;
 
@@ -57,11 +58,14 @@ public class Shooter : MonoBehaviour
         howToText.text = "";
         clickText.text = "どれか選ぶ";
         contClickRenda = true;
+        count = 7;
     }
 
 
     void Update()
     {
+        
+        
         prefab = clickMoveScript.CurrentSelectedObject;
 
         if (prefab != null && setObject && canClick)
@@ -70,6 +74,7 @@ public class Shooter : MonoBehaviour
             {
                 
                 howToText.text = "方向を決めてクリック長押し!";
+                clickText.text = "";
                 if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
                 {
                     power = 0; // 力をリセット
@@ -113,7 +118,7 @@ public class Shooter : MonoBehaviour
         {
             readyButton.gameObject.SetActive(false);
             howToText.text = "";
-            clickText.text = "";
+            
         }
         else if(prefab != null)
         {
