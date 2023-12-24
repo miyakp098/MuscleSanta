@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreText : MonoBehaviour
 {
@@ -33,7 +34,13 @@ public class ScoreText : MonoBehaviour
         // shooter.count == 0になった時、一度だけ実行
         if (shooter.count == 0 && cameraController.throwObj == null && !hasRunOnce)
         {
-            totalScoreText.text = $"TotalScore :{GameManager.instance.score}";
+            if (SceneManager.GetActiveScene().name == "Stage1")
+            {
+                totalScoreText.text = $"Score :{GameManager.instance.score}";
+            }else if(SceneManager.GetActiveScene().name == "Stage2")
+            {
+                totalScoreText.text = $"TotalScore :{GameManager.instance.score}";
+            }
             GameManager.instance.PlaySE(ClearSE);
             hasRunOnce = true;
             Clear.SetActive(true);

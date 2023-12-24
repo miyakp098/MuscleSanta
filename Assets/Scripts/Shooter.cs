@@ -58,14 +58,13 @@ public class Shooter : MonoBehaviour
         howToText.text = "";
         clickText.text = "どれか選ぶ";
         contClickRenda = true;
-        count = 7;
     }
 
 
     void Update()
     {
-        
-        
+
+        presentNumText.text = $"残り{count}個";
         prefab = clickMoveScript.CurrentSelectedObject;
 
         if (prefab != null && setObject && canClick)

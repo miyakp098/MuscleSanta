@@ -16,6 +16,10 @@ public class LoadSceneButton : MonoBehaviour
     {
         // 指定した名前のシーンをロード
         SceneManager.LoadScene(sceneName);
-        GameManager.instance.score = 0;
+        if(sceneName == "Title")
+        {
+            GameManager.instance.score = 0;
+        }
+        
     }
 }
