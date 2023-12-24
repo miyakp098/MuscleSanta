@@ -54,3 +54,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: yajirusi
+    uniqueID: 1815002075
+    locked: 0

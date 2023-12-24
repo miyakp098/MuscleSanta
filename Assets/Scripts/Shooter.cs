@@ -1,6 +1,8 @@
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using TMPro;
 
 public class Shooter : MonoBehaviour
 {
@@ -13,6 +15,13 @@ public class Shooter : MonoBehaviour
     public bool setObject = false;//投げるものがセットされているか
     public ClickMoveObject2D clickMoveScript;
     private Animator animator;
+
+    //クリックの管理
+    public bool contClickRenda = false;
+    private bool firstTimeEntered = true;
+
+
+    public TextMeshPro howToText;
 
     public int count = 7;
 
@@ -43,6 +52,8 @@ public class Shooter : MonoBehaviour
         readyButton.onClick.AddListener(OnButtonClicked);
         readyButton.gameObject.SetActive(false);
         canClick = true;
+        howToText.text = "";
+        contClickRenda = true;
     }
 
 
@@ -52,45 +63,62 @@ public class Shooter : MonoBehaviour
 
         if (prefab != null && setObject && canClick)
         {
-
-
-            if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
-            {
-                power = 0; // 力をリセット
-                isIncreasing = true;
-                animator.SetBool("throw", true); // Animatorのboolをtrueに設定
-
-                StartDragging();//矢印
-            }
-
-            if (Input.GetMouseButton(0)) // マウスを押し続けている間
-            {
-                UpdatePowerMeter();
-            }
-
-            //矢印
-            if (isDragging)
-            {
-                UpdateArrowPositionAndRotation();
-            }
-
-            if (Input.GetMouseButtonUp(0)) // マウスを離した瞬間
+            if (contClickRenda)
             {
                 
-                animator.SetBool("throw", false); // Animatorのboolをfalseに設定
+                howToText.text = "方向を決めてクリック長押し!";
+                if (Input.GetMouseButtonDown(0)) // マウスを押した瞬間
+                {
+                    power = 0; // 力をリセット
+                    isIncreasing = true;
+                    animator.SetBool("throw", true); // Animatorのboolをtrueに設定
 
-                EndDragging();//矢印
+                    StartDragging();//矢印
 
+
+                } 
+
+                if (Input.GetMouseButton(0)) // マウスを押し続けている間
+                {
+                    UpdatePowerMeter();
+                    howToText.text = "方向を決めて離す!";
+                }
+
+                //矢印
+                if (isDragging)
+                {
+                    UpdateArrowPositionAndRotation();
+                }
                 
+                if (Input.GetMouseButtonUp(0) && !firstTimeEntered)
+                {
+                    animator.SetBool("throw", false); // Animatorのboolをfalseに設定
+
+                    EndDragging();
+                    
+                }
+                if (firstTimeEntered)
+                {
+                    firstTimeEntered = false;
+                }
             }
+
+            
+            
         }
         else if (!cameraController.kakuninButtonNum)
         {
             readyButton.gameObject.SetActive(false);
+            howToText.text = "";
         }
         else if(prefab != null)
         {
             readyButton.gameObject.SetActive(true);
+            howToText.text = "";
+        }
+        else
+        {
+            howToText.text = "";
         }
         
         
@@ -139,9 +167,9 @@ public class Shooter : MonoBehaviour
         GameManager.instance.PlaySE(throwSE);
         ResetPowerMeter(); // メーターをリセット
         setObject = false;
-
+        firstTimeEntered = true;
         canClick = false; // マウスクリックを無効にする
-
+        contClickRenda = true;
         // Rigidbody2Dコンポーネントを取得
         Rigidbody2D rb = prefab.GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -183,8 +211,7 @@ public class Shooter : MonoBehaviour
     private void StartDragging()
     {
         isDragging = true;
-        Vector3 startPosition = throwPoint.transform.position;
-        currentArrow = Instantiate(arrowPrefab, startPosition, Quaternion.identity);
+        currentArrow = Instantiate(arrowPrefab, throwPoint.transform.position, Quaternion.identity);
     }
 
     private void UpdateArrowPositionAndRotation()
@@ -199,6 +226,16 @@ public class Shooter : MonoBehaviour
 
     private void EndDragging()
     {
+        isDragging = false;
+        Destroy(currentArrow); // 矢印を削除
+        Debug.Log("OK");
+        contClickRenda = false;
+    }
+
+    private IEnumerator EndDraggingCoroutine()
+    {
+        yield return new WaitForSeconds(1f); // 3秒待機
+
         isDragging = false;
         Destroy(currentArrow); // 矢印を削除
     }

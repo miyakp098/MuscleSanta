@@ -9,6 +9,9 @@ public class TouchObj : MonoBehaviour
     private CameraController cameraController;
     private Shooter shooter;
     public TextMeshProUGUI plusScoreText;
+
+    public float waittime = 2;
+
     void Awake()
     {
         cameraController = FindObjectOfType<CameraController>();
@@ -29,7 +32,7 @@ public class TouchObj : MonoBehaviour
             collision.gameObject.CompareTag("stone") ||
             collision.gameObject.CompareTag("toy"))
         {
-            StartCoroutine(WaitAndProcess(2f));
+            StartCoroutine(WaitAndProcess(waittime));
         }
             
     }
@@ -45,6 +48,5 @@ public class TouchObj : MonoBehaviour
             plusScoreText.text = "";
         }
         
-        Debug.Log("OK");
     }
 }

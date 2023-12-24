@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; // イベントシステムを使用するために必要
+using UnityEngine.EventSystems;
 
 public class SliderSEController : MonoBehaviour, IPointerUpHandler
 {
