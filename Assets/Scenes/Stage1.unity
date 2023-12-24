@@ -4212,6 +4212,8 @@ MonoBehaviour:
   throwPoint: {fileID: 77867358}
   setObject: 0
   clickMoveScript: {fileID: 1007750770}
+  contClickRenda: 0
+  howToText: {fileID: 783896107}
   count: 7
   readyButton: {fileID: 1152832689}
   canClick: 1

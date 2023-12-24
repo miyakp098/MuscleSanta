@@ -22,6 +22,7 @@ public class Shooter : MonoBehaviour
 
 
     public TextMeshPro howToText;
+    public TextMeshPro clickText;
 
     public int count = 7;
 
@@ -42,7 +43,8 @@ public class Shooter : MonoBehaviour
     //SE
     public AudioClip throwSE;
     public AudioClip readyButtonSE;
-   
+
+    Vector3 mousePosition;
 
     void Start()
     {
@@ -53,6 +55,7 @@ public class Shooter : MonoBehaviour
         readyButton.gameObject.SetActive(false);
         canClick = true;
         howToText.text = "";
+        clickText.text = "どれか選ぶ";
         contClickRenda = true;
     }
 
@@ -110,15 +113,18 @@ public class Shooter : MonoBehaviour
         {
             readyButton.gameObject.SetActive(false);
             howToText.text = "";
+            clickText.text = "";
         }
         else if(prefab != null)
         {
             readyButton.gameObject.SetActive(true);
             howToText.text = "";
+            clickText.text = "他の物にする";
         }
         else
         {
             howToText.text = "";
+            clickText.text = "どれか選ぶ";
         }
         
         
@@ -178,8 +184,8 @@ public class Shooter : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
         clickMoveScript.DeleteSelectedObject();
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
+
+
 
         Vector2 direction = (mousePosition - throwPoint.transform.position).normalized;
 
@@ -216,12 +222,12 @@ public class Shooter : MonoBehaviour
 
     private void UpdateArrowPositionAndRotation()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0; // Z軸は無視
 
         Vector3 direction = mousePosition - throwPoint.transform.position;
         currentArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction); // 矢印の方向を設定
-        // currentArrow.transform.localScale の設定は削除し、矢印の大きさは変更しない
+        // currentArrow.transform.localScale の設定は削除し、矢印の大きさは変更しないZif（
     }
 
     private void EndDragging()
@@ -230,6 +236,7 @@ public class Shooter : MonoBehaviour
         Destroy(currentArrow); // 矢印を削除
         Debug.Log("OK");
         contClickRenda = false;
+        howToText.text = "";
     }
 
     private IEnumerator EndDraggingCoroutine()
