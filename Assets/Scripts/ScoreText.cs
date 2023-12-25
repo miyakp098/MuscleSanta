@@ -97,6 +97,7 @@ public class ScoreText : MonoBehaviour
             if (GameManager.instance.highScore < GameManager.instance.score)
             {
                 GameManager.instance.highScore = GameManager.instance.score;
+                GameManager.instance.ScoreUpdate();
             }
 
         }

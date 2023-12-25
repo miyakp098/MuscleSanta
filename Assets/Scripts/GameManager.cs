@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using unityroom.Api;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -60,4 +62,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ScoreUpdate()
+    {
+
+        UnityroomApiClient.Instance.SendScore(1, highScore, ScoreboardWriteMode.HighScoreDesc);
+    }
 }
