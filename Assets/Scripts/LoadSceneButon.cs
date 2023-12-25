@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -5,6 +6,9 @@ using UnityEngine.UI;
 public class LoadSceneButton : MonoBehaviour
 {
     public string sceneName;  // ロードしたいシーンの名前
+
+
+
 
     void Start()
     {
@@ -14,12 +18,15 @@ public class LoadSceneButton : MonoBehaviour
 
     void LoadSpecifiedScene()
     {
-        // 指定した名前のシーンをロード
-        SceneManager.LoadScene(sceneName);
-        if(sceneName == "Title")
+        if (GameManager.instance.stageClear)
         {
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene("Title");
+
             GameManager.instance.score = 0;
         }
-        
     }
 }

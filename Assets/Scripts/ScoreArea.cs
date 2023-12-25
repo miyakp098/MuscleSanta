@@ -13,8 +13,6 @@ public class ScoreArea : MonoBehaviour
     public AudioClip yaySESpesial;
     public AudioClip yaySE;
 
-    public TextMeshProUGUI plusScoreText;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("switch") && gameSwitch)
@@ -54,12 +52,12 @@ public class ScoreArea : MonoBehaviour
     {
         GameManager.instance.score += 20 * pointNbai;
         GameManager.instance.PlaySE(yaySESpesial);
-        plusScoreText.text = $"+{20 * pointNbai}Point!!";
+        GameManager.instance.plusScore = $"+{20 * pointNbai}Point!!";
     }
     private void NormalScore()
     {
         GameManager.instance.score += 5 * pointNbai;
         GameManager.instance.PlaySE(yaySE);
-        plusScoreText.text = $"+{5 * pointNbai}Point!!";
+        GameManager.instance.plusScore = $"+{5 * pointNbai}Point!!";
     }
 }

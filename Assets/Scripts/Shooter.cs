@@ -116,19 +116,21 @@ public class Shooter : MonoBehaviour
         else if (!cameraController.kakuninButtonNum)
         {
             readyButton.gameObject.SetActive(false);
-            howToText.text = "";
-            
+            howToText.text = "プレゼントするものをクリック!";
+
         }
         else if(prefab != null)
         {
             readyButton.gameObject.SetActive(true);
             howToText.text = "";
             clickText.text = "他の物にする";
+            howToText.text = "サンタの上のボタンをクリック!";
         }
         else
         {
             howToText.text = "";
             clickText.text = "どれか選ぶ";
+            howToText.text = "プレゼントするものをクリック!";
         }
         
         

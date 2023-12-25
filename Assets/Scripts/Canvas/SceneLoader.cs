@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // シーン管理用の名前空間
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {

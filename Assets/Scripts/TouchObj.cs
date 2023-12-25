@@ -8,7 +8,6 @@ public class TouchObj : MonoBehaviour
     //カメラ
     private CameraController cameraController;
     private Shooter shooter;
-    public TextMeshProUGUI plusScoreText;
 
     public float waittime = 2;
 
@@ -16,11 +15,7 @@ public class TouchObj : MonoBehaviour
     {
         cameraController = FindObjectOfType<CameraController>();
         shooter = FindObjectOfType<Shooter>();
-        plusScoreText = FindObjectOfType<TextMeshProUGUI>();
-        if (plusScoreText == null)
-        {
-            Debug.LogError("TextMeshProUGUI object not found in the scene.");
-        }
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -45,7 +40,7 @@ public class TouchObj : MonoBehaviour
         shooter.canClick = true;
         if(shooter.count != 0)
         {
-            plusScoreText.text = "";
+            GameManager.instance.plusScore = "";
         }
         
     }

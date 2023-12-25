@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public int highScore = 0;
 
-
+    public string plusScore = "";
+    public bool stageClear = false;
 
     private void Awake()
     {
