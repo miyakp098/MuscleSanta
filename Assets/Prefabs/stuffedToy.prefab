@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6742250390367014699}
   - component: {fileID: 4296122840253256214}
   - component: {fileID: 2899699233267129699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: stuffedToy
   m_TagString: toy
   m_Icon: {fileID: 0}

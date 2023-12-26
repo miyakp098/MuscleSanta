@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4167231515247605932}
   - component: {fileID: 2234756142319009824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: switch
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1214485298151581778}
   - component: {fileID: 8453199128401373853}
   - component: {fileID: 1066545830239193173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: gameSwitch
   m_TagString: switch
   m_Icon: {fileID: 0}
