@@ -21,6 +21,7 @@ public class LoadSceneButton : MonoBehaviour
         if (GameManager.instance.stageClear)
         {
             SceneManager.LoadScene(sceneName);
+            GameManager.instance.score = 0;
         }
         else
         {
