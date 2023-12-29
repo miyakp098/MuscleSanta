@@ -9,7 +9,6 @@ public class LoadSceneButton : MonoBehaviour
 
 
 
-
     void Start()
     {
         // このゲームオブジェクトのButtonコンポーネントを取得し、リスナーを追加
@@ -21,13 +20,23 @@ public class LoadSceneButton : MonoBehaviour
         if (GameManager.instance.stageClear)
         {
             SceneManager.LoadScene(sceneName);
-            GameManager.instance.score = 0;
+
+            if (SceneManager.GetActiveScene().name == "Stage2" && !GameManager.instance.hasSetStage12Score)
+            {
+                GameManager.instance.stage12Score = GameManager.instance.score;
+                Debug.Log(GameManager.instance.stage12Score);
+                GameManager.instance.ScoreUpdate2();
+                GameManager.instance.hasSetStage12Score = true;
+            }
+
         }
         else
         {
             SceneManager.LoadScene("Title");
 
             GameManager.instance.score = 0;
+            GameManager.instance.stage12Score = 0;
+            GameManager.instance.hasSetStage12Score = false; // リセット
         }
     }
 }

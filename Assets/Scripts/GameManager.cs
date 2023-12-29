@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public int highScore = 0;
 
+    public bool hasSetStage12Score = false;
+    public int stage12Score = 0;
+
     public string plusScore = "";
     public bool stageClear = false;
 
@@ -66,5 +69,10 @@ public class GameManager : MonoBehaviour
     {
 
         UnityroomApiClient.Instance.SendScore(1, highScore, ScoreboardWriteMode.HighScoreDesc);
+    }
+    public void ScoreUpdate2()
+    {
+
+        UnityroomApiClient.Instance.SendScore(2, stage12Score, ScoreboardWriteMode.HighScoreDesc);
     }
 }
