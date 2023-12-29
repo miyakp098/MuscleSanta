@@ -80,7 +80,7 @@ public class ScoreText : MonoBehaviour
                 if (GameManager.instance.stageClear)
                 {
                     clearOrGameOverText.text = "";
-                    lodeSceneText.text = "Title";
+                    lodeSceneText.text = "Again!";
                 }
                 else
                 {
