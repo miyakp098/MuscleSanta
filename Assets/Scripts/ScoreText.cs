@@ -76,14 +76,15 @@ public class ScoreText : MonoBehaviour
             }
             else if(SceneManager.GetActiveScene().name == "Stage2")
             {
-                totalScoreText.text = $"TotalScore :{GameManager.instance.score}";
                 if (GameManager.instance.stageClear)
                 {
+                    totalScoreText.text = $"Score :{GameManager.instance.score}";
                     clearOrGameOverText.text = "";
                     lodeSceneText.text = "Again!";
                 }
                 else
                 {
+                    totalScoreText.text = $"TotalScore :{GameManager.instance.score}";
                     clearOrGameOverText.text = "";
                     lodeSceneText.text = "Title";
                 }

@@ -123,13 +123,13 @@ public class Shooter : MonoBehaviour
         {
             readyButton.gameObject.SetActive(true);
             howToText.text = "";
-            clickText.text = "他の物にする";
+            clickText.text = "他の物にする\n↓";
             howToText.text = "サンタの上のボタンをクリック!";
         }
         else
         {
             howToText.text = "";
-            clickText.text = "どれか選ぶ";
+            clickText.text = "どれか選ぶ\n↓";
             howToText.text = "プレゼントするものをクリック!";
         }
         
