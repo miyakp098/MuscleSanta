@@ -88,6 +88,13 @@ public class ScoreText : MonoBehaviour
                     clearOrGameOverText.text = "";
                     lodeSceneText.text = "Title";
                 }
+                if (!GameManager.instance.hasSetStage12Score)
+                {
+                    GameManager.instance.stage12Score = GameManager.instance.score;
+                    Debug.Log(GameManager.instance.stage12Score);
+                    GameManager.instance.ScoreUpdate2();
+                    GameManager.instance.hasSetStage12Score = true;
+                }
             }
             GameManager.instance.PlaySE(ClearSE);
             hasRunOnce = true;
@@ -100,6 +107,7 @@ public class ScoreText : MonoBehaviour
                 GameManager.instance.highScore = GameManager.instance.score;
                 GameManager.instance.ScoreUpdate();
             }
+            
 
         }
         else

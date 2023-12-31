@@ -21,13 +21,7 @@ public class LoadSceneButton : MonoBehaviour
         {
             SceneManager.LoadScene(sceneName);
 
-            if (SceneManager.GetActiveScene().name == "Stage2" && !GameManager.instance.hasSetStage12Score)
-            {
-                GameManager.instance.stage12Score = GameManager.instance.score;
-                Debug.Log(GameManager.instance.stage12Score);
-                GameManager.instance.ScoreUpdate2();
-                GameManager.instance.hasSetStage12Score = true;
-            }
+            
 
         }
         else
