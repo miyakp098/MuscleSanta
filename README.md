@@ -12,8 +12,9 @@ Unityroomで公開しています。以下のリンクからご覧いただけ�
 
 [マッスルサンタ ~ Present Power Throw ~ on Unityroom](https://unityroom.com/games/musclesanta_presentpowerthrow)
 
-##開発記録
+## 開発記録
 noteで振り返りと開発記録を書きました。以下のリンクからご覧いただけます。
+
 [unity1week「おくる」を振り返る](https://note.com/miya_kp3333/n/nb7f32868cd41)
 
 ## 使用した技術やツール
